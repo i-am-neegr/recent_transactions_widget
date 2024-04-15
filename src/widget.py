@@ -26,3 +26,5 @@ def get_date(date_and_time: str) -> str:
     date, _ = date_and_time.split("T")
     date_tuple = tuple(date.split("-"))
     return f"{date_tuple[2]}.{date_tuple[1]}.{date_tuple[0]}"
+
+
