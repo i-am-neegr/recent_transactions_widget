@@ -1,6 +1,7 @@
 from src.masks import bank_account_masking as account_masks
 from src.masks import bank_card_masking as card_masks
 
+
 # импортируем две функции и во избежание проблем с импортом в будущем, присваиваем им локальные имена
 
 
@@ -26,5 +27,3 @@ def get_date(date_and_time: str) -> str:
     date, _ = date_and_time.split("T")
     date_tuple = tuple(date.split("-"))
     return f"{date_tuple[2]}.{date_tuple[1]}.{date_tuple[0]}"
-
-
