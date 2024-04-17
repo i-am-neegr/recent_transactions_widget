@@ -9,7 +9,7 @@ def bank_card_masking(card_number: str | int) -> str:
             adding_el = card_number[num]
         else:
             adding_el = "*"
-        if (num + 1) % 4 == 0:
+        if (num + 1) % 4 == 0 and (num + 1) != 16:
             adding_el += " "
 
         masked_card += adding_el
