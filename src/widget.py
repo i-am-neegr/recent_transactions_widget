@@ -1,7 +1,6 @@
 from src.masks import bank_account_masking as account_masks
 from src.masks import bank_card_masking as card_masks
 
-
 # импортируем две функции и во избежание проблем с импортом в будущем, присваиваем им локальные имена
 
 
