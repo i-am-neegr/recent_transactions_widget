@@ -5,14 +5,17 @@ def filter_by_currency(transactions: List[Dict[str, Any]], currency: str) -> Ite
     """
     Filters transactions by currency and returns all transactions filtered by currency.
     """
-    return filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transactions)
+    for transaction in transactions:
+        if transaction["operationAmount"]["currency"]["code"] == currency:
+            yield transaction
 
 
 def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[str]:
     """
     Returns all transaction descriptions.
     """
-    return (transaction["description"] for transaction in transactions)
+    for transaction in transactions:
+        yield transaction["description"]
 
 
 def card_number_generator(start: int, end: int) -> Iterator[str]:
@@ -21,11 +24,11 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
     """
     for number in range(start, end + 1):
         yield (
-            f"{number:016d}"[:4]
-            + " "
-            + f"{number:016d}"[4:8]
-            + " "
-            + f"{number:016d}"[8:12]
-            + " "
-            + f"{number:016d}"[12:]
+                f"{number:016d}"[:4]
+                + " "
+                + f"{number:016d}"[4:8]
+                + " "
+                + f"{number:016d}"[8:12]
+                + " "
+                + f"{number:016d}"[12:]
         )
