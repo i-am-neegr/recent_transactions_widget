@@ -24,11 +24,11 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
     """
     for number in range(start, end + 1):
         yield (
-                f"{number:016d}"[:4]
-                + " "
-                + f"{number:016d}"[4:8]
-                + " "
-                + f"{number:016d}"[8:12]
-                + " "
-                + f"{number:016d}"[12:]
+            f"{number:016d}"[:4]
+            + " "
+            + f"{number:016d}"[4:8]
+            + " "
+            + f"{number:016d}"[8:12]
+            + " "
+            + f"{number:016d}"[12:]
         )

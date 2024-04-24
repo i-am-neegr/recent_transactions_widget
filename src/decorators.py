@@ -1,10 +1,18 @@
 from datetime import datetime
 from functools import wraps
+from typing import Any, Callable, Dict, Tuple
 
-def log(filename=None):
-    def decorator(func):
+
+def log(filename: None | str = None) -> Callable:
+    """
+    A function decorator that will log some information about the operation of your function.
+    Also it has an additional arguement "filename" where you can give the path to the logging file or its name,
+    but if you won't do it this information will be printed in console
+    """
+
+    def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Tuple, **kwargs: Dict) -> Any:
             status = "ok"
             try:
                 res = func(*args, **kwargs)
