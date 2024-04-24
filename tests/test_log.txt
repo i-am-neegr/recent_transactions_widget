@@ -1,0 +1,2 @@
+2024-04-24 12:56:47 add_two ok
+2024-04-24 16:53:18 half_of error: <ZeroDivisionError>. Inputs: (0,), {}
