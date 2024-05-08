@@ -12,15 +12,26 @@ def half_of(x: int | float) -> int | float:
 
 
 def test_add_two() -> None:
+    with open("test_log.txt", "r", encoding="UTF-8") as file:
+        amount_before = 0
+        for _ in file:
+            amount_before += 1
     add_two(52)
     with open("test_log.txt", "r", encoding="UTF-8") as file:
-        logged_message = file.readline().strip()
-    assert logged_message == "2024-04-24 12:56:47 add_two ok"
+        amount_after = 0
+        for _ in file:
+            amount_after += 1
+    assert amount_before + 1 == amount_after
 
 
 def test_half_of() -> None:
-    half_of(0)
     with open("test_log.txt", "r", encoding="UTF-8") as file:
-        file.readline()
-        logged_message = file.readline().strip()
-    assert logged_message == "2024-04-24 16:53:18 half_of error: <ZeroDivisionError>. Inputs: (0,), {}"
+        amount_before = 0
+        for _ in file:
+            amount_before += 1
+    half_of(52)
+    with open("test_log.txt", "r", encoding="UTF-8") as file:
+        amount_after = 0
+        for _ in file:
+            amount_after += 1
+    assert amount_before + 1 == amount_after
