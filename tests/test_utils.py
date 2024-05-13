@@ -15,7 +15,8 @@ def test_decimal_rub_course() -> None:
 
 
 # Тест для функции json_transactions_from
-def test_json_transactions_from(tmp_path: Path) -> None:
+@patch('builtins.open')
+def test_json_transactions_from(mock_open: Mock) -> None:
     test_data = [
         {
             "id": 441945886,
@@ -36,17 +37,15 @@ def test_json_transactions_from(tmp_path: Path) -> None:
             "to": "Счет 35383033474447895560",
         },
     ]
-    test_file = tmp_path / "test_transactions.json"
-    with open(test_file, "w") as f:
-        json.dump(test_data, f)
+    mock_open.return_value.__enter__.return_value.read.return_value = json.dumps(test_data)
 
-    transactions = json_transactions_from(str(test_file))
+    transactions = json_transactions_from("test_transactions.json")
     assert len(transactions) == len(test_data)
     assert transactions[0]["operationAmount"]["amount"] == "31957.58"
 
 
 # Тест для функции transaction_sum
-@patch("src.utils.requests.get")
+@patch('src.utils.requests.get')
 def test_transaction_sum(mock_get: Mock) -> None:
     mock_response = Mock()
     mock_response.text = "1 USD = 75.5 ₽"

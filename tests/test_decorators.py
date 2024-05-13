@@ -1,37 +1,35 @@
+import os
 from src.decorators import log
 
 
-@log("test_log.txt")
+@log(os.path.join("test_log.txt"))
 def add_two(x: int | float) -> int | float:
     return x + 2
 
 
-@log("test_log.txt")
+@log(os.path.join("test_log.txt"))
 def half_of(x: int | float) -> int | float:
-    return 2 / x
+    raise ZeroDivisionError
 
 
 def test_add_two() -> None:
-    with open("test_log.txt", "r", encoding="UTF-8") as file:
-        amount_before = 0
-        for _ in file:
-            amount_before += 1
+    log_file_path = os.path.join("test_log.txt")
+    with open(log_file_path, "r", encoding="UTF-8") as file:
+        amount_before = sum(1 for _ in file)
     add_two(52)
-    with open("test_log.txt", "r", encoding="UTF-8") as file:
-        amount_after = 0
-        for _ in file:
-            amount_after += 1
+    with open(log_file_path, "r", encoding="UTF-8") as file:
+        amount_after = sum(1 for _ in file)
     assert amount_before + 1 == amount_after
 
 
 def test_half_of() -> None:
-    with open("test_log.txt", "r", encoding="UTF-8") as file:
-        amount_before = 0
-        for _ in file:
-            amount_before += 1
-    half_of(52)
-    with open("test_log.txt", "r", encoding="UTF-8") as file:
-        amount_after = 0
-        for _ in file:
-            amount_after += 1
+    log_file_path = os.path.join("test_log.txt")
+    with open(log_file_path, "r", encoding="UTF-8") as file:
+        amount_before = sum(1 for _ in file)
+    try:
+        half_of(52)
+    except ZeroDivisionError:
+        pass
+    with open(log_file_path, "r", encoding="UTF-8") as file:
+        amount_after = sum(1 for _ in file)
     assert amount_before + 1 == amount_after

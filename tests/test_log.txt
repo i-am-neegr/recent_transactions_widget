@@ -2,3 +2,20 @@
 2024-04-24 16:53:18 half_of error: <ZeroDivisionError>. Inputs: (0,), {}
 2024-05-07 17:40:03 add_two ok
 2024-05-07 17:40:55 add_two ok
+2024-05-13 11:48:30 add_two ok
+2024-05-13 11:48:30 half_of ok
+2024-05-13 14:56:14 add_two ok
+2024-05-13 14:57:00 half_of ok
+2024-05-13 14:57:50 half_of ok
+2024-05-13 15:01:20 add_two ok
+2024-05-13 15:01:20 half_of ok
+2024-05-13 15:07:02 add_two ok
+2024-05-13 15:07:02 half_of ok
+2024-05-13 15:30:17 add_two ok
+2024-05-13 15:30:17 half_of error: <ZeroDivisionError>. Inputs: (52,), {}
+2024-05-13 15:39:58 add_two ok
+2024-05-13 15:39:58 half_of error: <ZeroDivisionError>. Inputs: (52,), {}
+2024-05-13 15:41:02 add_two ok
+2024-05-13 15:41:02 half_of error: <ZeroDivisionError>. Inputs: (52,), {}
+2024-05-13 15:44:25 add_two ok
+2024-05-13 15:44:25 half_of error: <ZeroDivisionError>. Inputs: (52,), {}
