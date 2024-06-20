@@ -1,8 +1,11 @@
 import json
+import logging
 from decimal import Decimal
 from typing import Dict, List
 
 import requests
+
+logger = logging.getLogger(__name__)
 
 
 def calc_to_rubles(any_currency_amount: Decimal | int | float, rub_amount_for_one: Decimal | int | float) -> Decimal:
@@ -18,7 +21,7 @@ def decimal_rub_course(input_data: str) -> Decimal:
     that are located before this sign
     """
     rub_index = input_data.find("₽")
-    raw_course = input_data[rub_index - 8 : rub_index - 1]
+    raw_course = input_data[rub_index - 8: rub_index - 1]
     course_lst = [char for char in raw_course if char.isdigit() or char in ",."]
     str_course = "".join(course_lst).replace(",", ".")
     return Decimal(str_course)
@@ -33,8 +36,9 @@ def json_transactions_from(filepath: str) -> List:
         with open(filepath, "r", encoding="utf-8") as f:
             json_list = json.load(f)
     except Exception as error:
-        print(f"There is at least a {type(error).__name__}")
+        logger.info(f"There is at least a {type(error).__name__}")
     finally:
+        logger.info("JSON file was taken")
         return json_list
 
 
@@ -53,4 +57,5 @@ def transaction_sum(json_transaction: Dict) -> Decimal:
         data = response.text
         foreign_currency_amount = Decimal(json_transaction["operationAmount"]["amount"])
         rub_amount = calc_to_rubles(foreign_currency_amount, decimal_rub_course(data))
+    logger.info("Calculations finished")
     return rub_amount
