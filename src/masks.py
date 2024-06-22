@@ -1,6 +1,6 @@
-from logger import setup_logger
+from logger import setup_logging
 
-logger = setup_logger('masks_logger', 'masks.log')
+logger = setup_logging()
 
 def bank_card_masking(card_number: str | int) -> str:
     """
@@ -18,11 +18,11 @@ def bank_card_masking(card_number: str | int) -> str:
                 adding_el += " "
 
             masked_card += adding_el
-        logger.info('Маска успешно применена к номеру карты')
+        logger.info("Маска успешно применена к номеру карты")
         return masked_card
     except Exception as e:
-        logger.error(f'Ошибка при применении маски{e}')
-
+        logger.error(f"Ошибка при применении маски: {e}")
+        return "**** **** **** ****"  # Возвращаем безопасное значение в случае ошибки
 
 def bank_account_masking(account_number: str | int) -> str:
     """
@@ -30,7 +30,8 @@ def bank_account_masking(account_number: str | int) -> str:
     """
     try:
         account_number = str(account_number)
-        logger.info('Маска успешно применена к номеру счета')
+        logger.info("Маска успешно применена к номеру счета")
         return "**" + account_number[-4:]
     except Exception as e:
-        logger.error(f'Ошибка при применении маски{e}')
+        logger.error(f"Ошибка при применении маски: {e}")
+        return "******"  # Возвращаем безопасное значение в случае ошибки

@@ -1,6 +1,5 @@
 import json
 from decimal import Decimal
-from pathlib import Path
 from unittest.mock import Mock, patch
 
 from src.utils import calc_to_rubles, decimal_rub_course, json_transactions_from, transaction_sum
@@ -15,7 +14,7 @@ def test_decimal_rub_course() -> None:
 
 
 # Тест для функции json_transactions_from
-@patch('builtins.open')
+@patch("builtins.open")
 def test_json_transactions_from(mock_open: Mock) -> None:
     test_data = [
         {
@@ -45,7 +44,7 @@ def test_json_transactions_from(mock_open: Mock) -> None:
 
 
 # Тест для функции transaction_sum
-@patch('src.utils.requests.get')
+@patch("src.utils.requests.get")
 def test_transaction_sum(mock_get: Mock) -> None:
     mock_response = Mock()
     mock_response.text = "1 USD = 75.5 ₽"
