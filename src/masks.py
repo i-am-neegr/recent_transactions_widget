@@ -2,6 +2,7 @@ from logger import setup_logging
 
 logger = setup_logging()
 
+
 def bank_card_masking(card_number: str | int) -> str:
     """
     function that needs card number as param, and returns masked card
@@ -23,6 +24,7 @@ def bank_card_masking(card_number: str | int) -> str:
     except Exception as e:
         logger.error(f"Ошибка при применении маски: {e}")
         return "**** **** **** ****"  # Возвращаем безопасное значение в случае ошибки
+
 
 def bank_account_masking(account_number: str | int) -> str:
     """
