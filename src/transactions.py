@@ -1,28 +1,21 @@
 import csv
-from typing import Any, Callable, Iterator, List, Tuple, Union
+from typing import Any, Dict, Hashable, List
 
 import pandas as pd
 
 
-def csv_transaction(
-    filepath: str, data_type: Callable = list
-) -> Union[List[List[str]], Tuple[Tuple[str, ...], ...], Iterator[Any], Any]:
+def csv_transaction(filepath: str) -> List[Dict[str, Any]]:
     """
-    Returns your transaction list from csv file, but there is additional arguement "datatype"
-    where you can write what type of collection do you want to get your transactions in.
-    Only list and tuple are accepted, but you can get csv.reader object if you will place str as datatype
+    Returns a list of transactions from a CSV file, where each transaction is a dictionary.
     """
     with open(filepath, "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        if data_type == str:
-            return iter(reader)
-        else:
-            return data_type(reader)
+        reader = csv.DictReader(f, delimiter=";")
+        return list(reader)
 
 
-def xlsx_transaction(filepath: str) -> pd.DataFrame:
+def xlsx_transaction(filepath: str) -> list[dict[Hashable, Any]]:
     """
-    Returns your transaction as pandas dataframe
+    Returns a list of transactions from an XLSX file, where each transaction is a dictionary.
     """
     df = pd.read_excel(filepath)
-    return df
+    return df.to_dict(orient="records")
